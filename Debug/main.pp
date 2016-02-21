@@ -9,6 +9,7 @@ main.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/intrinsics_lega
 main.obj: ../LampHeaders/LampPinout.h
 main.obj: ../LampHeaders/GlobalConfig.h
 main.obj: ../LampHeaders/MsgAndStates.h
+main.obj: ../LampHeaders/UartAndClock.h
 
 ../main.c: 
 C:/ti/ccsv6/ccs_base/msp430/include/msp430.h: 
@@ -19,3 +20,4 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/intrinsics_legacy_undefs.
 ../LampHeaders/LampPinout.h: 
 ../LampHeaders/GlobalConfig.h: 
 ../LampHeaders/MsgAndStates.h: 
+../LampHeaders/UartAndClock.h: 

@@ -2,6 +2,7 @@
 #include "LampHeaders/LampPinout.h"
 #include "LampHeaders/GlobalConfig.h"
 #include "LampHeaders/MsgAndStates.h"
+#include "LampHeaders/UartAndClock.h"
 
 /*
  * main.c
@@ -9,18 +10,16 @@
 int main(void) {
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
     setClk(USCI_INPUT_CLK);
+    initUart();
+    initTriacs();
 
-	CLRBIT(P1SEL, TRIAC1);
-	CLRBIT(P2SEL, TRIAC2);
+    __enable_interrupt();				//Interrupts Enabled
 
-	CLRBIT(P1SEL, (0x00));
-	CLRBIT(P2SEL, (0x00));
-	CLRBIT(P1DIR, (0x00));
-	CLRBIT(P2DIR, (0x00));
-	SETBIT(P1DIR, TRIAC1);
-	SETBIT(P2DIR, TRIAC2);
-	SETBIT(P1DIR, TRIAC1);
-	SETBIT(P2DIR, TRIAC2);
+    /* UART */
+    initUart();
+    uart_puts("\n*************************\n");
+    uart_puts("\tHello UART!\n");
+    uart_puts("*************************\n");
 
 
 	for(;;) {}

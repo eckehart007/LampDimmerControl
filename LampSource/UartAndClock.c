@@ -10,6 +10,7 @@
 #include "../LampHeaders/GlobalConfig.h"
 #include "../LampHeaders/LampPinout.h"
 #include "../LampHeaders/MsgAndStates.h"
+#include "../LampHeaders/UartAndClock.h"
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>

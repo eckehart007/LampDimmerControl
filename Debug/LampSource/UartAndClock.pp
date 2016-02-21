@@ -9,6 +9,7 @@ LampSource/UartAndClock.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/incl
 LampSource/UartAndClock.obj: ../LampSource/../LampHeaders/GlobalConfig.h
 LampSource/UartAndClock.obj: ../LampSource/../LampHeaders/LampPinout.h
 LampSource/UartAndClock.obj: ../LampSource/../LampHeaders/MsgAndStates.h
+LampSource/UartAndClock.obj: ../LampSource/../LampHeaders/UartAndClock.h
 LampSource/UartAndClock.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/string.h
 LampSource/UartAndClock.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/linkage.h
 LampSource/UartAndClock.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/ctype.h
@@ -25,6 +26,7 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/intrinsics_legacy_undefs.
 ../LampSource/../LampHeaders/GlobalConfig.h: 
 ../LampSource/../LampHeaders/LampPinout.h: 
 ../LampSource/../LampHeaders/MsgAndStates.h: 
+../LampSource/../LampHeaders/UartAndClock.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/string.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/linkage.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/ctype.h: 

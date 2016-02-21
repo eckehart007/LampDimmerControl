@@ -11,6 +11,8 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./main.obj" \
+"./LampSource/EncodersAndButtons.obj" \
+"./LampSource/TriacAndZeroCross.obj" \
 "./LampSource/UartAndClock.obj" \
 "../lnk_msp430g2553.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -152,8 +154,8 @@ LampDimmerControl.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "main.pp" "LampSource\UartAndClock.pp" 
-	-$(RM) "main.obj" "LampSource\UartAndClock.obj" 
+	-$(RM) "main.pp" "LampSource\EncodersAndButtons.pp" "LampSource\TriacAndZeroCross.pp" "LampSource\UartAndClock.pp" 
+	-$(RM) "main.obj" "LampSource\EncodersAndButtons.obj" "LampSource\TriacAndZeroCross.obj" "LampSource\UartAndClock.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
