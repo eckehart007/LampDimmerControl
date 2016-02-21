@@ -12,7 +12,7 @@
 /* OUTPUTS */
 #define TRIAC1_PORT		(P1OUT)
 #define	TRIAC1			(BIT6)		//Pin 14 - P1.6/TA0.1
-#define TRIAC2_PORT		(P1OUT)
+#define TRIAC2_PORT		(P2OUT)
 #define TRIAC2			(BIT5)		//Pin 13 - P2.5/TA1.2
 
 /* INPUTS */
