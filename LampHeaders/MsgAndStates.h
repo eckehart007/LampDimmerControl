@@ -14,6 +14,7 @@
 
 
 //TRIAC COMMANDS
+#define COMM_TRIAC						"TRIAC"		//"% 100" 100 = duty % 0 -100%
 #define COMM_TRIAC1						"TRIAC1"	//"% 100" 100 = duty % 0 -100%
 #define COMM_TRIAC2						"TRIAC2"
 #define COMM_SET_ALL_TRIACS_OFF			"ALL_TRIACS_OFF"

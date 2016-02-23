@@ -10,6 +10,7 @@
 
 //PROTO
 extern void initTriacs(void);
+extern void tglTriac(char triacPin);
 
 
 
