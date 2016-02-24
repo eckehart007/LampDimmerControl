@@ -11,6 +11,7 @@ LampSource/TriacAndZeroCross.obj: ../LampSource/../LampHeaders/TriacAndZeroCross
 LampSource/TriacAndZeroCross.obj: ../LampSource/../LampHeaders/LampPinout.h
 LampSource/TriacAndZeroCross.obj: ../LampSource/../LampHeaders/MsgAndStates.h
 LampSource/TriacAndZeroCross.obj: ../LampSource/../LampHeaders/UartAndClock.h
+LampSource/TriacAndZeroCross.obj: ../LampSource/../LampHeaders/EncodersAndButton.h
 LampSource/TriacAndZeroCross.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/stdio.h
 LampSource/TriacAndZeroCross.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/linkage.h
 LampSource/TriacAndZeroCross.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/stdarg.h
@@ -27,6 +28,7 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/intrinsics_legacy_undefs.
 ../LampSource/../LampHeaders/LampPinout.h: 
 ../LampSource/../LampHeaders/MsgAndStates.h: 
 ../LampSource/../LampHeaders/UartAndClock.h: 
+../LampSource/../LampHeaders/EncodersAndButton.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/stdio.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/linkage.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include/stdarg.h: 

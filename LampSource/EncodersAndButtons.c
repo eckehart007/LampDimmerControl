@@ -9,6 +9,22 @@
 #include "../LampHeaders/GlobalConfig.h"
 #include "../LampHeaders/EncodersAndButton.h"
 #include "../LampHeaders/LampPinout.h"
+#include "../LampHeaders/MsgAndStates.h"
+#include "../LampHeaders/UartAndClock.h"
+#include <stdio.h>
+#include <string.h>
+
+/* VARIABLES */
+unsigned char sw1_flag = FALSE;
+unsigned char sw2_flag = FALSE;
+
+unsigned char ENCODER_1B_flag = FALSE;
+unsigned char ENCODER_1A_flag = FALSE;
+unsigned char ENCODER1_COUNT = 0;
+
+unsigned char ENCODER_2B_flag = FALSE;
+unsigned char ENCODER_2A_flag = FALSE;
+unsigned char ENCODER2_COUNT = 0;
 
 /*
 * Init BUTTON1
@@ -34,19 +50,34 @@ extern void initButtons(void) {
 
 extern void initEncoders(void) {
 	SETBIT(P1REN, (ENCODER_1B + ENCODER_1A));
-	SETBIT(P1REN, (ENCODER_2B + ENCODER_2A));
+	SETBIT(P2REN, (ENCODER_2B + ENCODER_2A));
 
 	CLRBIT(P1DIR, (ENCODER_1B + ENCODER_1A));
-	CLRBIT(P1DIR, (ENCODER_2B + ENCODER_2A));
+	CLRBIT(P2DIR, (ENCODER_2B + ENCODER_2A));
 
 	SETBIT(P1IE, (ENCODER_1B + ENCODER_1A));		/* enable SW1 interrupt */
-	SETBIT(P1IE, (ENCODER_2B + ENCODER_2A));		/* enable SW2 interrupt */
+	SETBIT(P2IE, (ENCODER_2B + ENCODER_2A));		/* enable SW2 interrupt */
 
-	SETBIT(P1IES, (ENCODER_1B + ENCODER_1A));		/* interrupt on high-to-low transition */
-	SETBIT(P1IES, (ENCODER_2B + ENCODER_2A));		/* interrupt on high-to-low transition */
+	CLRBIT(P1IES, (ENCODER_1B + ENCODER_1A));		/* interrupt on low-to-high transition */
+	CLRBIT(P2IES, (ENCODER_2B + ENCODER_2A));		/* interrupt on low-to-high transition */
 
 	SETBIT(P1OUT, (ENCODER_1B + ENCODER_1A));
-	SETBIT(P1OUT, (ENCODER_2B + ENCODER_2A));
+	SETBIT(P2OUT, (ENCODER_2B + ENCODER_2A));
+}
+
+extern void encoder1State(void) {
+	ENCODER_1A_flag = FALSE;
+	ENCODER_1B_flag = FALSE;
+	static char msg[32] = "";
+	sprintf(msg, "ENCODER1:%d\n", ENCODER1_COUNT);
+	uart_puts(msg);
+}
+extern void encoder2State(void) {
+	ENCODER_2A_flag = FALSE;
+	ENCODER_2B_flag = FALSE;
+	static char msg[32] = "";
+	sprintf(msg, "ENCODER2:%d\n", ENCODER2_COUNT);
+	uart_puts(msg);
 }
 
 /* Port 1 interrupt to service the button press */
@@ -54,8 +85,30 @@ extern void initEncoders(void) {
 __interrupt void PORT1_ISR(void) {
 	if(P1IFG & SW1) {
 		CLRBIT(P1IFG, SW1); 			//Clear BUTTON1 interrupt flag
-		TGLBIT(TRIAC1_PORT, TRIAC1);
+		sw1_flag = TRUE;
+	} else if (P1IFG & ENCODER_1B) {
+		CLRBIT(P1IFG, ENCODER_1B);
+		if (Encoder1_PORT & ENCODER_1A) {
+			ENCODER_1A_flag = TRUE;
+			if (ENCODER1_COUNT == 23) {
+				ENCODER1_COUNT = 0;
+			} else {
+				ENCODER1_COUNT++;
+			}
+		}
+	} else if (P1IFG & ENCODER_1A) {
+		CLRBIT(P1IFG, ENCODER_1A);
+		if (Encoder1_PORT & ENCODER_1B) {
+			ENCODER_1A_flag = TRUE;
+			if (ENCODER1_COUNT == 0) {
+				ENCODER1_COUNT = 23;
+			} else {
+				ENCODER1_COUNT--;
+			}
+		}
+
 	}
+	__low_power_mode_off_on_exit();
 }
 
 /* Port 2 interrupt to service the button press */
@@ -63,8 +116,30 @@ __interrupt void PORT1_ISR(void) {
 __interrupt void PORT2_ISR(void) {
 	if(P2IFG & SW2) {
 		CLRBIT(P2IFG, SW2);				//Clear BUTTON2 interrupt flag
-		TGLBIT(TRIAC2_PORT, TRIAC2);
+		sw2_flag = TRUE;
+	} else if (P2IFG & ENCODER_2B) {
+		CLRBIT(P2IFG, ENCODER_2B);
+		if (Encoder2_PORT & ENCODER_2A) {
+			ENCODER_2A_flag = TRUE;
+			if (ENCODER2_COUNT == 23) {
+				ENCODER2_COUNT = 0;
+			} else {
+				ENCODER2_COUNT++;
+			}
+		}
+	} else if (P2IFG & ENCODER_2A) {
+		CLRBIT(P2IFG, ENCODER_2A);
+		if (Encoder2_PORT & ENCODER_2B) {
+			ENCODER_2A_flag = TRUE;
+			if (ENCODER2_COUNT == 0) {
+				ENCODER2_COUNT = 23;
+			} else {
+				ENCODER2_COUNT--;
+			}
+		}
+
 	}
+	__low_power_mode_off_on_exit();
 }
 
 

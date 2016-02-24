@@ -53,18 +53,22 @@ int main(void) {
      * Non-stop loop
      */
 	while (1) {
-		_bis_SR_register(LPM0_bits);					/* Enter LPM0, enable interrupts */
+		_bis_SR_register(LPM0_bits);					// Enter LPM0, enable interrupts
 
-		if (rx_flag == 1) {
+		if (rx_flag == TRUE) {
 			uart_gets(pString);
 			splitUartMsg();
 		}
 
 		/* TRIAC CONTROL */
-		if (strcmp(pString1, COMM_TRIAC1) == 0) {
+		if ((strcmp(pString1, COMM_TRIAC1) == 0) || sw1_flag) {
 			tglTriac(TRIAC1);
-		} else if (strcmp(pString1, COMM_TRIAC2) == 0) {
+		} else if ((strcmp(pString1, COMM_TRIAC2) == 0) || sw2_flag) {
 			tglTriac(TRIAC2);
+		} else if (ENCODER_1B_flag || ENCODER_1A_flag) {
+			encoder1State();
+		} else if (ENCODER_2B_flag || ENCODER_2A_flag) {
+			encoder2State();
 		} else {
 			uart_puts("\nBAD\n");
 		}

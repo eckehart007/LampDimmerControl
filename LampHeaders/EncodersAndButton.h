@@ -11,5 +11,19 @@
 //PROTO
 extern void initButtons(void);
 extern void initEncoders(void);
+extern void encoder1State(void);
+extern void encoder2State(void);
+
+//VAR
+extern unsigned char sw1_flag;
+extern unsigned char sw2_flag;
+
+extern unsigned char ENCODER_1B_flag;
+extern unsigned char ENCODER_1A_flag;
+extern unsigned char ENCODER1_COUNT;
+
+extern unsigned char ENCODER_2B_flag;
+extern unsigned char ENCODER_2A_flag;
+extern unsigned char ENCODE2_COUNT;
 
 #endif /* LAMPHEADERS_ENCODERSANDBUTTON_H_ */
