@@ -13,6 +13,7 @@ extern void initButtons(void);
 extern void initEncoders(void);
 extern void encoder1State(void);
 extern void encoder2State(void);
+extern void initTimerA0(void);
 
 //VAR
 extern unsigned char sw1_flag;

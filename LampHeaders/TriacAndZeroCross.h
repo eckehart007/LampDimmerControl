@@ -11,6 +11,10 @@
 //PROTO
 extern void initTriacs(void);
 extern void tglTriac(char triacPin);
+extern void initZeroCross(void);
+
+//VAR
+extern unsigned char zeroCross_flag;
 
 
 

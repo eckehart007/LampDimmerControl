@@ -32,27 +32,24 @@ extern void initTriacs(void) {
 	CLRBIT(P2OUT, TRIAC2);
 }
 
+extern void initZeroCross(void) {
+	SETBIT(P2REN, ZERO_CROSS);
+	CLRBIT(P2DIR, ZERO_CROSS);
+	SETBIT(P2IE, ZERO_CROSS);		/* enable SW1 interrupt */
+	SETBIT(P2IES, ZERO_CROSS);		/* interrupt on high-to-low transition */
+	SETBIT(P2OUT, ZERO_CROSS);
+}
+
 extern void tglTriac(char triacPin) {
-	//static char msg[32] = "";
 	if (triacPin == TRIAC1) {
-		/*
-		if ((TRIAC1_PORT & TRIAC1) == 0) {
-			sprintf(msg, COMM_TRIAC1, "ON", "%\n");
-		}
-		sprintf(msg, COMM_TRIAC1, "ON", "%\n");
-		*/
+		while(zeroCross_flag == FALSE);
 		uart_puts("TGL TRIAC1\n");
 		TGLBIT(TRIAC1_PORT, TRIAC1);
 		sw1_flag = FALSE;
 		return;
 	}
 	if (triacPin == TRIAC2) {
-		/*
-		if ((TRIAC2_PORT & TRIAC2) == 0) {
-			sprintf(msg, COMM_TRIAC2, "ON", "%\n");
-		}
-		sprintf(msg, COMM_TRIAC2, "ON", "%\n");
-		*/
+		while(zeroCross_flag == FALSE);
 		uart_puts("TGL TRIAC2\n");
 		TGLBIT(TRIAC2_PORT, TRIAC2);
 		sw2_flag = FALSE;

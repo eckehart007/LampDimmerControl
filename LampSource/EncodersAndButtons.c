@@ -17,6 +17,8 @@
 /* VARIABLES */
 unsigned char sw1_flag = FALSE;
 unsigned char sw2_flag = FALSE;
+unsigned char zeroCross_flag = FALSE;
+unsigned char zeroCross_count = 0;
 
 unsigned char ENCODER_1B_flag = FALSE;
 unsigned char ENCODER_1A_flag = FALSE;
@@ -80,6 +82,22 @@ extern void encoder2State(void) {
 	uart_puts(msg);
 }
 
+/*
+ * Init Timer A0
+ */
+extern void initTimerA0(void) {
+	SETBIT(TA0CTL, (TASSEL_2 | MC_2 | ID_3));		/* SMCLK, count Up,  divider 8 */
+	SETBIT(TA1CTL, (TASSEL_2 | MC_2 | ID_3));		/* SMCLK, count Up,  divider 8 */
+
+	/* Triac1 ZeroCrossing timer */
+	TA0CCR0 = 10000; 								/* 8000000/8/10000 = 100Hz = 10ms */
+	CLRBIT(TA0CCTL0, (CCIE));						/* Disable Timer */
+
+	/* Triac2 ZeroCrossing timer */
+    TA1CCR0 = 10000; 								/* 8000000/8/10000 = 100Hz = 10ms */
+    CLRBIT(TA1CCTL0, (CCIE));						/* Disable Timer */
+}
+
 /* Port 1 interrupt to service the button press */
 #pragma vector=PORT1_VECTOR
 __interrupt void PORT1_ISR(void) {
@@ -137,7 +155,10 @@ __interrupt void PORT2_ISR(void) {
 				ENCODER2_COUNT--;
 			}
 		}
-
+	} else if (P2IFG & ZERO_CROSS) {
+		CLRBIT(P2IFG, ZERO_CROSS);
+		zeroCross_flag = TRUE;
+		zeroCross_count++;
 	}
 	__low_power_mode_off_on_exit();
 }

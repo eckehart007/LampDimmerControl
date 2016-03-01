@@ -8,6 +8,9 @@
  *	ZeroCrossing is detected with falling edge interrupt
  *	UART commands for TRIAC ON/OFF, CUSTOM BRIGHTNESS, BOTH ON/OFF
  *
+ *	TODO ZeroCrossing falling edge interrupt. If zero flag is set then ..
+ *	Triac commands work only then zero flag is set or it waits with timer until (sleeps) its set or return error code after timeout.
+ *
  *  Egert Pärna
  *  20.11.2015
  *  Built with Code Composer Studio v6.1
@@ -39,6 +42,8 @@ int main(void) {
     initTriacs();
     initButtons();
     initEncoders();
+    initZeroCross();
+    initTimerA0();
 
     __enable_interrupt();				//Interrupts Enabled
 
