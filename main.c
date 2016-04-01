@@ -74,8 +74,6 @@ int main(void) {
 			encoder1State();
 		} else if (ENCODER_2B_flag || ENCODER_2A_flag) {
 			encoder2State();
-		} else {
-			uart_puts("\nBAD\n");
 		}
 
 		//CLEAR UART MSG

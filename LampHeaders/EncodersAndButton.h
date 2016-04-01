@@ -27,4 +27,7 @@ extern unsigned char ENCODER_2B_flag;
 extern unsigned char ENCODER_2A_flag;
 extern unsigned char ENCODE2_COUNT;
 
+extern unsigned char triac1_timer_flag;
+extern unsigned char triac2_timer_flag;
+
 #endif /* LAMPHEADERS_ENCODERSANDBUTTON_H_ */

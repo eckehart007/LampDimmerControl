@@ -28,6 +28,9 @@ unsigned char ENCODER_2B_flag = FALSE;
 unsigned char ENCODER_2A_flag = FALSE;
 unsigned char ENCODER2_COUNT = 0;
 
+extern unsigned char triac1_timer_flag = FALSE;
+extern unsigned char triac2_timer_flag = FALSE;
+
 /*
 * Init BUTTON1
 */
@@ -124,7 +127,6 @@ __interrupt void PORT1_ISR(void) {
 				ENCODER1_COUNT--;
 			}
 		}
-
 	}
 	__low_power_mode_off_on_exit();
 }
@@ -163,4 +165,21 @@ __interrupt void PORT2_ISR(void) {
 	__low_power_mode_off_on_exit();
 }
 
+/*
+ * TRIAC1 timer
+ */
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void	Timer0_A0 (void) {
+	triac1_timer_flag = TRUE;
+	__low_power_mode_off_on_exit();
+}
+
+/*
+ * TRIAC2 timer
+ */
+#pragma vector=TIMER1_A0_VECTOR
+__interrupt void	Timer1_A0 (void) {
+	triac2_timer_flag = TRUE;
+	__low_power_mode_off_on_exit();
+}
 
